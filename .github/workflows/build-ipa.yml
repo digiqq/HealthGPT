@@ -19,13 +19,13 @@ jobs:
           ls /Applications | grep Xcode || true
           xcodebuild -version
 
-      - name: Select Xcode 16.2 (official requirement)
+      - name: Select Xcode 16.3
         run: |
-          if [ -d "/Applications/Xcode_16.2.app" ]; then
-            sudo xcode-select -s /Applications/Xcode_16.2.app
-            echo "Switched to Xcode 16.2"
+          if [ -d "/Applications/Xcode_16.3.app" ]; then
+            sudo xcode-select -s /Applications/Xcode_16.3.app
+            echo "Switched to Xcode 16.3"
           else
-            echo "Xcode_16.2.app not found, using default"
+            echo "Xcode_16.3.app not found, using default"
           fi
           xcodebuild -version
 
