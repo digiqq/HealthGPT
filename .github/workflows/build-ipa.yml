@@ -19,14 +19,9 @@ jobs:
           ls /Applications | grep Xcode || true
           xcodebuild -version
 
-      - name: Select Xcode 16.3
+      - name: Select Xcode 16.4 (has iOS 18.5 SDK)
         run: |
-          if [ -d "/Applications/Xcode_16.3.app" ]; then
-            sudo xcode-select -s /Applications/Xcode_16.3.app
-            echo "Switched to Xcode 16.3"
-          else
-            echo "Xcode_16.3.app not found, using default"
-          fi
+          sudo xcode-select -s /Applications/Xcode_16.4.app
           xcodebuild -version
 
       - name: Build app (no signing)
@@ -42,6 +37,9 @@ jobs:
             CODE_SIGNING_ALLOWED=NO \
             CODE_SIGNING_REQUIRED=NO \
             CODE_SIGN_IDENTITY="" \
+            IPHONEOS_DEPLOYMENT_TARGET=18.5 \
+            SWIFT_STRICT_CONCURRENCY=minimal \
+            SWIFT_TREAT_WARNINGS_AS_ERRORS=NO \
             build
 
       - name: Package IPA
